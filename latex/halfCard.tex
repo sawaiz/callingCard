@@ -1,0 +1,307 @@
+\documentclass{article}
+
+\usepackage[]{geometry}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage[normalem]{ulem}
+
+\geometry{paperheight=32mm}
+\geometry{paperwidth=74mm}
+
+% Solarized
+\usepackage{xcolor}
+\definecolor{solarizedBase03}  {RGB} {000, 043, 054}
+\definecolor{solarizedBase02}  {RGB} {007, 054, 066}
+\definecolor{solarizedBase01}  {RGB} {088, 110, 117}
+\definecolor{solarizedBase00}  {RGB} {101, 123, 131}
+\definecolor{solarizedBase0}   {RGB} {131, 148, 150}
+\definecolor{solarizedBase1}   {RGB} {147, 161, 161}
+\definecolor{solarizedBase2}   {RGB} {238, 232, 213}
+\definecolor{solarizedBase3}   {RGB} {253, 246, 227}
+\definecolor{solarizedYellow}  {RGB} {181, 137, 000}
+\definecolor{solarizedOrange}  {RGB} {203, 075, 022}
+\definecolor{solarizedRed}     {RGB} {220, 050, 047}
+\definecolor{solarizedMagenta} {RGB} {211, 054, 130}
+\definecolor{solarizedViolet}  {RGB} {108, 113, 196}
+\definecolor{solarizedBlue}    {RGB} {038, 139, 210}
+\definecolor{solarizedCyan}    {RGB} {042, 161, 152}
+\definecolor{solarizedGreen}   {RGB} {133, 153, 000}
+
+\definecolor{XTERM-096}{HTML}{875f87}
+\definecolor{XTERM-103}{HTML}{8787af}
+\definecolor{XTERM-136}{HTML}{af8700}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% absolute positioning of typeset material    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\placetextbox}[4][center]{%
+  % [#1]: box anchor: center (default) | 
+  %                 south west | west | north west | north |
+  %                 north east | east | south east | south | 
+  %                 mid west | mid | mid east |
+  %                 base west | base | base east 
+  % #2: horizontal position (fraction of page width)
+  % #3: vertical position (fraction of page height)
+  % #4: content
+  %
+  \tikz[remember picture,overlay,x=\paperwidth,y=\paperheight]{%
+    \node[anchor=#1,inner sep=0pt]
+    at ($(current page.south west)+(#2,#3)$) {#4};
+  }%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Full page image
+\newcommand{\cardImage}[1]{
+    \pagebreak
+    \tikz[remember picture, overlay] \node[inner sep=0pt ] at (current page.center){\includegraphics[width=\paperwidth]{./images/#1}};
+    \clearpage
+}
+
+% Full page quote
+% Color, quote
+\newcommand{\pageQuote}[4]{
+  \pagebreak
+  \fontsize{#2}{#2}
+
+    \begin{tikzpicture}[remember picture, overlay]
+      % Background
+      \fill [#1] (current page.north west) rectangle (current page.south east);
+    \end{tikzpicture}
+    \placetextbox[north west]{6mm}{26mm}{\textcolor{solarizedBase3}{#3}}
+    \placetextbox[south east]{68mm}{6mm}{\textcolor{solarizedBase3}{#4}}
+    \clearpage
+}
+
+\newcommand{\terminal}[8]{
+  \pagebreak
+  % Set font to IBM Plex
+  \setmainfont [ Path = ./IBM_Plex_Mono/] {IBMPlexMono-Regular.ttf}
+  \fontsize{8pt}{8pt}
+  % Backgoround is solarized dark
+  \begin{tikzpicture}[remember picture, overlay]
+    % Background
+    \fill [solarizedBase03] (current page.north west) rectangle (current page.south east);
+  \end{tikzpicture}
+  {#1}
+  {#2}
+  {#3}
+  {#4}
+  {#5}
+  {#6}
+  {#7}
+  {#8}
+  \clearpage
+}
+
+\newcommand{\terminalLine}[4]{
+  % #1 - Line Position
+  % #2 - time
+  % #3 - pwd
+  % #4 - line
+  \placetextbox[north west]{4mm}{#1}{#2\textcolor{solarizedGreen}{#4}}
+  \placetextbox[north east]{68mm}{#1}{\textcolor{XTERM-103}{#3}}  
+}
+
+\newcommand{\termnialTime}[1]{
+  \textcolor{XTERM-096}{#1}\textcolor{XTERM-136}{>}
+}
+
+\begin{document}
+\setmainfont [ Path = Raleway/] {Raleway-Thin.ttf}
+\fontsize{4mm}{4mm}
+% \placetextbox[north west]{0.05}{0.95}{\includegraphics[height=0.4in,keepaspectratio]{logo.jpg}}
+% \placetextbox[north west]{0.05}{0.45}{\includegraphics[height=0.4in,keepaspectratio]{logo.jpg}}
+
+% Bleed rectangle
+\begin{tikzpicture}[remember picture,overlay]
+    % Background
+    \fill [solarizedBase3] (current page.north west) rectangle (current page.south east);
+    % Email Line
+    \draw [line width=0.25mm, solarizedCyan ] ($(current page.south east)+(-4mm,+4mm)$) -- ($(current page.south east)+(-51mm,+4mm)$);
+    \fill [solarizedCyan] ($(current page.south east)+(-51mm,+5mm)$) rectangle ($(current page.south east)+(-46.6mm,+4mm)$);
+    % Website Line
+    \draw [line width=0.25mm, solarizedOrange ] ($(current page.south east)+(-4mm,+5mm)$) -- ($(current page.south east)+(-35mm,+5mm)$);
+    \fill [solarizedOrange] ($(current page.south east)+(-10mm,+6mm)$) rectangle ($(current page.south east)+(-4mm,+5mm)$);  
+    % Twitter Line
+    \draw [line width=0.25mm, solarizedViolet ] ($(current page.south east)+(-13mm,+6mm)$) -- ($(current page.south east)+(-38mm,+6mm)$);
+    \fill [solarizedViolet] ($(current page.south east)+(-38mm,+7mm)$) rectangle ($(current page.south east)+(-32mm,+6mm)$);  
+    % Name Line
+    \draw [line width=0.25mm, solarizedYellow ] ($(current page.south east)+(-51mm,+6.875mm)$) -- ($(current page.south east)+(-38.75mm,+6.875mm)$);
+    \fill [solarizedYellow] ($(current page.south east)+(-42.5mm,+5.875mm)$) rectangle ($(current page.south east)+(-38.75mm,+6.875mm)$);  
+    % Bleed Rectangle`
+    % \draw[dashed, line width=0.1mm,] ($(current page.north west)+(+2mm,-2mm)$) rectangle ($(current page.south east)+(-2mm,+2mm)$);'
+    % Safe Rectangle
+    % \draw[dashed, thin] ($(current page.north west)+(+4mm,-4mm)$) rectangle ($(current page.south east)+(-4mm,+4mm)$);'
+\end{tikzpicture}
+    
+
+% % Contents:
+\setmainfont [ Path = ./IBM_Plex_Mono/] {IBMPlexMono-Regular.ttf}
+\fontsize{4pt}{4pt}
+
+\placetextbox[south west]{23mm}{4mm-0.125mm}{\textcolor{solarizedBase3}{EMAIL}}
+\placetextbox[south east]{70mm}{5mm-0.125mm}{\textcolor{solarizedBase3}{WEBSITE}}
+\placetextbox[south west]{36mm}{6mm-0.125mm}{\textcolor{solarizedBase3}{TWITTER}}
+\placetextbox[north west]{31.75mm}{7mm}{\textcolor{solarizedBase3}{NAME}}
+
+% Full Contact
+\setmainfont [ Path = ./Raleway/] {Raleway-Thin.ttf}
+\fontsize{12pt}{12pt}
+\placetextbox[south east]{70mm}{7mm}{\textcolor{solarizedBase00}{sawaiz@sawaizsyed.com}}
+
+\cardImage{DSC_0025.jpg}
+\cardImage{amsterdam.jpg}
+\cardImage{arch.jpg}
+\cardImage{archetecture.jpg}
+\cardImage{austria.jpg}
+\cardImage{barcelona.jpg}
+\cardImage{blades.jpg}
+\cardImage{building.jpg}
+\cardImage{cabin.jpg}
+\cardImage{cactus.jpg}
+\cardImage{christmas.jpg}
+\cardImage{christmasTree.jpg}
+\cardImage{city.jpg}
+\cardImage{clockwork.jpg}
+\cardImage{clothes.jpg}
+\cardImage{colorful.jpg}
+\cardImage{cooking.jpg}
+\cardImage{counter.jpg}
+\cardImage{court.jpg}
+\cardImage{distance.jpg}
+\cardImage{dom.jpg}
+\cardImage{dome.jpg}
+\cardImage{drying.jpg}
+\cardImage{edemame.jpg}
+\cardImage{exchange.jpg}
+\cardImage{face.jpg}
+\cardImage{fermilab.jpg}
+\cardImage{ferry.jpg}
+\cardImage{flowers.jpg}
+\cardImage{foilage.jpg}
+\cardImage{funktrum.jpg}
+\cardImage{gassometer.jpg}
+\cardImage{glass.jpg}
+\cardImage{graniteMountain.jpg}
+\cardImage{hongKong.jpg}
+\cardImage{lake.jpg}
+\cardImage{lamp.jpg}
+\cardImage{library.jpg}
+\cardImage{lights.jpg}
+\cardImage{lightsTree.jpg}
+\cardImage{linen.jpg}
+\cardImage{lookLeft.jpg}
+\cardImage{monmarte.jpg}
+\cardImage{mountains.jpg}
+\cardImage{origami.jpg}
+\cardImage{packages.jpg}
+\cardImage{petals.jpg}
+\cardImage{pier.jpg}
+\cardImage{pomogranite.jpg}
+\cardImage{protest.jpg}
+\cardImage{rails.jpg}
+% \cardImage{redSky.jpg}
+\cardImage{sacretHeart.jpg}
+\cardImage{secular.jpg}
+\cardImage{shattered.jpg}
+\cardImage{sheep.jpg}
+\cardImage{shells.jpg}
+\cardImage{shutters.jpg}
+\cardImage{spire.jpg}
+\cardImage{standoff.jpg}
+\cardImage{starFort.jpg}
+\cardImage{steeple.jpg}
+\cardImage{stocks.jpg}
+\cardImage{streets.jpg}
+\cardImage{sunrise.jpg}
+\cardImage{sunset.jpg}
+\cardImage{sword.jpg}
+\cardImage{tea.jpg}
+\cardImage{temperdrom.jpg}
+\cardImage{tiny.jpg}
+\cardImage{tree.jpg}
+\cardImage{tvTower.jpg}
+\cardImage{venice.jpg}
+\cardImage{vinard.jpg}
+\cardImage{vines.jpg}
+\cardImage{volkspark.jpg}
+\cardImage{wall.jpg}
+\cardImage{mist.jpg}
+\cardImage{pin.jpg}
+\cardImage{chili.jpg}
+\cardImage{rose.jpg}
+
+\setmainfont [ Path = ./Raleway/] {Raleway-Thin.ttf}
+% \pageQuote{solarizedBase03}  {30pt}{50mm f/1.2}{Nikkor}
+\pageQuote{solarizedYellow}  {14pt}{Nothing is as permenent}{as a temporary solution.}
+\pageQuote{solarizedOrange}  {24pt}{One copy\dots}{is none copy.}
+\pageQuote{solarizedRed}     {24pt}{Is loneliness}{contagious?}
+
+\setmainfont [ Path = ./Poiret_One/] {PoiretOne-Regular.ttf}
+
+% Quote Pages
+\pageQuote{solarizedMagenta} {20pt}{What would you}{recommend?}
+\pageQuote{solarizedViolet}  {16pt}{Take more pictures}{\rotatebox{180}{Take more pictures}}
+\pageQuote{solarizedBlue}    {20pt}{Have it in my size?}{82/69/89}
+\pageQuote{solarizedCyan}    {20pt}{Talk it over some}{\sout{coffee} tea}
+\pageQuote{solarizedGreen}   {30pt}{I'm your}{guy\raisebox{-6pt}{-}guy.}
+
+\setmainfont [ Path = ./Homemade_Apple/] {HomemadeApple-Regular.ttf}
+
+% \pageQuote{solarizedGreen}  {16pt}{Nothing is as permenent}{as a temporary solution.}
+\pageQuote{solarizedCyan}   {20pt}{One copy\dots}{is none copy.}
+\pageQuote{solarizedBlue}   {22pt}{Is loneliness}{contagious?}
+\pageQuote{solarizedBase03} {24pt}{the devil}{you know}
+
+\setmainfont [ Path = ./Dawning_of_a_New_Day/] {DawningofaNewDay-Regular.ttf}
+
+\pageQuote{solarizedOrange}   {36pt}{\rotatebox{7}{Crazy as me}}{}
+\pageQuote{solarizedYellow}   {28pt}{Come ease your}{mind with me.}
+
+\setmainfont [ Path = ./Special_Elite/] {SpecialElite-Regular.ttf}
+
+\pageQuote{solarizedViolet}  {19pt}{Tell me\dots}{What do you Love?}
+\pageQuote{solarizedMagenta} {30pt}{}{With love,}
+\pageQuote{solarizedRed}     {16pt}{Some call it foolish,}{guess I'll call it art.}
+
+% Terminal Pages
+\terminal{\terminalLine{28mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{25mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{22mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{19mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{16mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{13mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{10mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{07mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{\_}}
+
+\terminal{\terminalLine{28mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{25mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{22mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{19mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{16mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{13mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{10mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
+         {\terminalLine{07mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{\_}}
+
+\terminal{\terminalLine{28mm}{\termnialTime{11:10}}{/DE/Berlin}{cd ../Frankfurt}}
+         {\terminalLine{25mm}{\termnialTime{13:26}}{/DE/Frankfurt}{cd ..}}
+         {\terminalLine{22mm}{\termnialTime{13:26}}{/DE}{cd ../US}}
+         {\terminalLine{19mm}{\termnialTime{16:42}}{/US}{cd Atlanta}}
+         {\terminalLine{16mm}{\termnialTime{16:42}}{/US/Atlanta}{cd}}
+         {\terminalLine{13mm}{\termnialTime{17:36}}{\raisebox{-6pt}{\char`~}}{\_}}
+         {}{}
+
+\terminal{\terminalLine{28mm}{\termnialTime{17:10}}{/DE/Berlin}{whoami}}
+         {\terminalLine{25mm}{}{}{\textcolor{solarizedBase2}{sawaiz}}}
+         {\terminalLine{22mm}{\termnialTime{17:12}}{/DE/Berlin}{cat \textcolor{solarizedBase2}{phone}}}
+         {\terminalLine{19mm}{}{}{\textcolor{solarizedBase2}{+1 678-457-2610}}}
+         {\terminalLine{16mm}{\termnialTime{17:13}}{/DE/Berlin}{cat \textcolor{solarizedBase2}{address}}}
+         {\terminalLine{13mm}{}{}{\textcolor{solarizedBase2}{Badensche Straße 40, 10715}}}
+         {\terminalLine{10mm}{\termnialTime{17:16}}{/DE/Berlin}{\_}}
+         {}
+         
+\end{document}
