@@ -3,7 +3,12 @@
 \usepackage[]{geometry}
 \usepackage{graphicx}
 \usepackage{fontspec}
+\usepackage{pgf}
 \usepackage[normalem]{ulem}
+
+% Configuration and Setup
+\newcommand{\fullEmail}{sawaiz@sawaizsyed.com}
+\newcommand{\batchDir}{batch0}
 
 \geometry{paperheight=32mm}
 \geometry{paperwidth=74mm}
@@ -57,7 +62,7 @@
 % Full page image
 \newcommand{\cardImage}[1]{
     \pagebreak
-    \tikz[remember picture, overlay] \node[inner sep=0pt ] at (current page.center){\includegraphics[width=\paperwidth]{./images/#1}};
+    \tikz[remember picture, overlay] \node[inner sep=0pt ] at (current page.center){\includegraphics[width=\paperwidth]{./images/\batchDir/#1}};
     \clearpage
 }
 
@@ -79,7 +84,7 @@
 \newcommand{\terminal}[8]{
   \pagebreak
   % Set font to IBM Plex
-  \setmainfont [ Path = ./IBM_Plex_Mono/] {IBMPlexMono-Regular.ttf}
+  \setmainfont [ Path = ./fonts/IBM_Plex_Mono/] {IBMPlexMono-Regular.ttf}
   \fontsize{8pt}{8pt}
   % Backgoround is solarized dark
   \begin{tikzpicture}[remember picture, overlay]
@@ -111,7 +116,7 @@
 }
 
 \begin{document}
-\setmainfont [ Path = Raleway/] {Raleway-Thin.ttf}
+\setmainfont [ Path = ./fonts/Raleway/] {Raleway-Thin.ttf}
 \fontsize{4mm}{4mm}
 % \placetextbox[north west]{0.05}{0.95}{\includegraphics[height=0.4in,keepaspectratio]{logo.jpg}}
 % \placetextbox[north west]{0.05}{0.45}{\includegraphics[height=0.4in,keepaspectratio]{logo.jpg}}
@@ -140,7 +145,7 @@
     
 
 % % Contents:
-\setmainfont [ Path = ./IBM_Plex_Mono/] {IBMPlexMono-Regular.ttf}
+\setmainfont [ Path = ./fonts/IBM_Plex_Mono/] {IBMPlexMono-Regular.ttf}
 \fontsize{4pt}{4pt}
 
 \placetextbox[south west]{23mm}{4mm-0.125mm}{\textcolor{solarizedBase3}{EMAIL}}
@@ -149,9 +154,10 @@
 \placetextbox[north west]{31.75mm}{7mm}{\textcolor{solarizedBase3}{NAME}}
 
 % Full Contact
-\setmainfont [ Path = ./Raleway/] {Raleway-Thin.ttf}
+\setmainfont [ Path = ./fonts/Raleway/] {Raleway-Thin.ttf}
 \fontsize{12pt}{12pt}
-\placetextbox[south east]{70mm}{7mm}{\textcolor{solarizedBase00}{sawaiz@sawaizsyed.com}}
+\placetextbox[south east]{70mm}{7mm}{\textcolor{solarizedBase00}{\fullEmail}}
+
 
 \cardImage{DSC_0025.jpg}
 \cardImage{amsterdam.jpg}
@@ -235,13 +241,13 @@
 \cardImage{chili.jpg}
 \cardImage{rose.jpg}
 
-\setmainfont [ Path = ./Raleway/] {Raleway-Thin.ttf}
+\setmainfont [ Path = ./fonts/Raleway/] {Raleway-Thin.ttf}
 % \pageQuote{solarizedBase03}  {30pt}{50mm f/1.2}{Nikkor}
 \pageQuote{solarizedYellow}  {14pt}{Nothing is as permenent}{as a temporary solution.}
 \pageQuote{solarizedOrange}  {24pt}{One copy\dots}{is none copy.}
 \pageQuote{solarizedRed}     {24pt}{Is loneliness}{contagious?}
 
-\setmainfont [ Path = ./Poiret_One/] {PoiretOne-Regular.ttf}
+\setmainfont [ Path = ./fonts/Poiret_One/] {PoiretOne-Regular.ttf}
 
 % Quote Pages
 \pageQuote{solarizedMagenta} {20pt}{What would you}{recommend?}
@@ -250,19 +256,19 @@
 \pageQuote{solarizedCyan}    {20pt}{Talk it over some}{\sout{coffee} tea}
 \pageQuote{solarizedGreen}   {30pt}{I'm your}{guy\raisebox{-6pt}{-}guy.}
 
-\setmainfont [ Path = ./Homemade_Apple/] {HomemadeApple-Regular.ttf}
+\setmainfont [ Path = ./fonts/Homemade_Apple/] {HomemadeApple-Regular.ttf}
 
 % \pageQuote{solarizedGreen}  {16pt}{Nothing is as permenent}{as a temporary solution.}
 \pageQuote{solarizedCyan}   {20pt}{One copy\dots}{is none copy.}
 \pageQuote{solarizedBlue}   {22pt}{Is loneliness}{contagious?}
 \pageQuote{solarizedBase03} {24pt}{the devil}{you know}
 
-\setmainfont [ Path = ./Dawning_of_a_New_Day/] {DawningofaNewDay-Regular.ttf}
+\setmainfont [ Path = ./fonts/Dawning_of_a_New_Day/] {DawningofaNewDay-Regular.ttf}
 
 \pageQuote{solarizedOrange}   {36pt}{\rotatebox{7}{Crazy as me}}{}
 \pageQuote{solarizedYellow}   {28pt}{Come ease your}{mind with me.}
 
-\setmainfont [ Path = ./Special_Elite/] {SpecialElite-Regular.ttf}
+\setmainfont [ Path = ./fonts/Special_Elite/] {SpecialElite-Regular.ttf}
 
 \pageQuote{solarizedViolet}  {19pt}{Tell me\dots}{What do you Love?}
 \pageQuote{solarizedMagenta} {30pt}{}{With love,}
