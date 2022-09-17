@@ -8,7 +8,8 @@
 
 % Configuration and Setup
 \newcommand{\fullEmail}{sawaiz@sawaizsyed.com}
-\newcommand{\batchDir}{batch0}
+\newcommand{\batchDir}{batch1}
+\newcommand{\print}{dev}
 
 \geometry{paperheight=32mm}
 \geometry{paperwidth=74mm}
@@ -62,7 +63,17 @@
 % Full page image
 \newcommand{\cardImage}[1]{
     \pagebreak
-    \tikz[remember picture, overlay] \node[inner sep=0pt ] at (current page.center){\includegraphics[width=\paperwidth]{./images/\batchDir/#1}};
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[inner sep=0pt ] at (current page.center){\includegraphics[width=\paperwidth]{./images/\batchDir/#1}};
+
+      % Bleed and Safe rectangles
+      \ifx \print \undefined 
+        % Bleed Rectangle`
+        \draw[dashed, line width=0.1mm,] ($(current page.north west)+(+2mm,-2mm)$) rectangle ($(current page.south east)+(-2mm,+2mm)$);
+        % Safe Rectangle
+        \draw[dashed, thin] ($(current page.north west)+(+4mm,-4mm)$) rectangle ($(current page.south east)+(-4mm,+4mm)$);
+      \fi
+    \end{tikzpicture}
     \clearpage
 }
 
@@ -137,10 +148,13 @@
     % Name Line
     \draw [line width=0.25mm, solarizedYellow ] ($(current page.south east)+(-51mm,+6.875mm)$) -- ($(current page.south east)+(-38.75mm,+6.875mm)$);
     \fill [solarizedYellow] ($(current page.south east)+(-42.5mm,+5.875mm)$) rectangle ($(current page.south east)+(-38.75mm,+6.875mm)$);  
-    % Bleed Rectangle`
-    % \draw[dashed, line width=0.1mm,] ($(current page.north west)+(+2mm,-2mm)$) rectangle ($(current page.south east)+(-2mm,+2mm)$);'
-    % Safe Rectangle
-    % \draw[dashed, thin] ($(current page.north west)+(+4mm,-4mm)$) rectangle ($(current page.south east)+(-4mm,+4mm)$);'
+    
+    \ifx \print \undefined 
+      % Bleed Rectangle`
+      \draw[dashed, line width=0.1mm,] ($(current page.north west)+(+2mm,-2mm)$) rectangle ($(current page.south east)+(-2mm,+2mm)$);
+      % Safe Rectangle
+      \draw[dashed, thin] ($(current page.north west)+(+4mm,-4mm)$) rectangle ($(current page.south east)+(-4mm,+4mm)$);
+    \fi
 \end{tikzpicture}
     
 
@@ -150,7 +164,7 @@
 
 \placetextbox[south west]{23mm}{4mm-0.125mm}{\textcolor{solarizedBase3}{EMAIL}}
 \placetextbox[south east]{70mm}{5mm-0.125mm}{\textcolor{solarizedBase3}{WEBSITE}}
-\placetextbox[south west]{36mm}{6mm-0.125mm}{\textcolor{solarizedBase3}{TWITTER}}
+\placetextbox[south west]{36mm}{6mm-0.3mm}{\textcolor{solarizedBase3}{IG/TWTR}}
 \placetextbox[north west]{31.75mm}{7mm}{\textcolor{solarizedBase3}{NAME}}
 
 % Full Contact
@@ -158,148 +172,122 @@
 \fontsize{12pt}{12pt}
 \placetextbox[south east]{70mm}{7mm}{\textcolor{solarizedBase00}{\fullEmail}}
 
-
-\cardImage{DSC_0025.jpg}
-\cardImage{amsterdam.jpg}
-\cardImage{arch.jpg}
-\cardImage{archetecture.jpg}
-\cardImage{austria.jpg}
-\cardImage{barcelona.jpg}
-\cardImage{blades.jpg}
-\cardImage{building.jpg}
-\cardImage{cabin.jpg}
-\cardImage{cactus.jpg}
-\cardImage{christmas.jpg}
-\cardImage{christmasTree.jpg}
-\cardImage{city.jpg}
-\cardImage{clockwork.jpg}
-\cardImage{clothes.jpg}
-\cardImage{colorful.jpg}
-\cardImage{cooking.jpg}
-\cardImage{counter.jpg}
-\cardImage{court.jpg}
-\cardImage{distance.jpg}
-\cardImage{dom.jpg}
-\cardImage{dome.jpg}
-\cardImage{drying.jpg}
-\cardImage{edemame.jpg}
-\cardImage{exchange.jpg}
-\cardImage{face.jpg}
-\cardImage{fermilab.jpg}
-\cardImage{ferry.jpg}
-\cardImage{flowers.jpg}
-\cardImage{foilage.jpg}
-\cardImage{funktrum.jpg}
-\cardImage{gassometer.jpg}
-\cardImage{glass.jpg}
-\cardImage{graniteMountain.jpg}
-\cardImage{hongKong.jpg}
-\cardImage{lake.jpg}
-\cardImage{lamp.jpg}
-\cardImage{library.jpg}
-\cardImage{lights.jpg}
-\cardImage{lightsTree.jpg}
-\cardImage{linen.jpg}
-\cardImage{lookLeft.jpg}
-\cardImage{monmarte.jpg}
-\cardImage{mountains.jpg}
-\cardImage{origami.jpg}
-\cardImage{packages.jpg}
-\cardImage{petals.jpg}
-\cardImage{pier.jpg}
-\cardImage{pomogranite.jpg}
-\cardImage{protest.jpg}
-\cardImage{rails.jpg}
-% \cardImage{redSky.jpg}
-\cardImage{sacretHeart.jpg}
-\cardImage{secular.jpg}
-\cardImage{shattered.jpg}
-\cardImage{sheep.jpg}
-\cardImage{shells.jpg}
-\cardImage{shutters.jpg}
-\cardImage{spire.jpg}
-\cardImage{standoff.jpg}
-\cardImage{starFort.jpg}
-\cardImage{steeple.jpg}
-\cardImage{stocks.jpg}
-\cardImage{streets.jpg}
-\cardImage{sunrise.jpg}
-\cardImage{sunset.jpg}
-\cardImage{sword.jpg}
-\cardImage{tea.jpg}
-\cardImage{temperdrom.jpg}
-\cardImage{tiny.jpg}
-\cardImage{tree.jpg}
-\cardImage{tvTower.jpg}
-\cardImage{venice.jpg}
-\cardImage{vinard.jpg}
-\cardImage{vines.jpg}
-\cardImage{volkspark.jpg}
-\cardImage{wall.jpg}
-\cardImage{mist.jpg}
-\cardImage{pin.jpg}
-\cardImage{chili.jpg}
-\cardImage{rose.jpg}
-
-\setmainfont [ Path = ./fonts/Raleway/] {Raleway-Thin.ttf}
-% \pageQuote{solarizedBase03}  {30pt}{50mm f/1.2}{Nikkor}
-\pageQuote{solarizedYellow}  {14pt}{Nothing is as permenent}{as a temporary solution.}
-\pageQuote{solarizedOrange}  {24pt}{One copy\dots}{is none copy.}
-\pageQuote{solarizedRed}     {24pt}{Is loneliness}{contagious?}
-
-\setmainfont [ Path = ./fonts/Poiret_One/] {PoiretOne-Regular.ttf}
+\cardImage{0001.jpg}
+\cardImage{0002.jpg}
+\cardImage{0003.jpg}
+\cardImage{0004.jpg}
+\cardImage{0005.jpg}
+\cardImage{0006.jpg}
+\cardImage{0007.jpg}
+\cardImage{0008.jpg}
+\cardImage{0009.jpg}
+\cardImage{0010.jpg}
+\cardImage{0011.jpg}
+\cardImage{0012.jpg}
+\cardImage{0013.jpg}
+\cardImage{0014.jpg}
+\cardImage{0015.jpg}
+\cardImage{0016.jpg}
+\cardImage{0017.jpg}
+\cardImage{0018.jpg}
+\cardImage{0019.jpg}
+\cardImage{0020.jpg}
+\cardImage{0021.jpg}
+\cardImage{0022.jpg}
+\cardImage{0023.jpg}
+\cardImage{0024.jpg}
+\cardImage{0025.jpg}
+\cardImage{0026.jpg}
+\cardImage{0027.jpg}
+\cardImage{0028.jpg}
+\cardImage{0029.jpg}
+\cardImage{0030.jpg}
+\cardImage{0031.jpg}
+% \cardImage{0032.jpg}
+\cardImage{0033.jpg}
+\cardImage{0034.jpg}
+\cardImage{0035.jpg}
+\cardImage{0036.jpg}
+\cardImage{0037.jpg}
+\cardImage{0038.jpg}
+\cardImage{0039.jpg}
+\cardImage{0040.jpg}
+\cardImage{0041.jpg}
+\cardImage{0042.jpg}
+\cardImage{0043.jpg}
+\cardImage{0044.jpg}
+\cardImage{0045.jpg}
+\cardImage{0046.jpg}
+\cardImage{0047.jpg}
+\cardImage{0048.jpg}
+\cardImage{0049.jpg}
+\cardImage{0050.jpg}
+\cardImage{0051.jpg}
+\cardImage{0052.jpg}
+\cardImage{0053.jpg}
+\cardImage{0054.jpg}
+\cardImage{0055.jpg}
+\cardImage{0056.jpg}
+\cardImage{0057.jpg}
+\cardImage{0058.jpg}
+\cardImage{0059.jpg}
+\cardImage{0060.jpg}
+\cardImage{0061.jpg}
+\cardImage{0062.jpg}
+\cardImage{0063.jpg}
+\cardImage{0064.jpg}
+\cardImage{0065.jpg}
+\cardImage{0066.jpg}
+\cardImage{0067.jpg}
+\cardImage{0068.jpg}
+\cardImage{0069.jpg}
+\cardImage{0070.jpg}
+\cardImage{0071.jpg}
+\cardImage{0072.jpg}
+\cardImage{0073.jpg}
+\cardImage{0074.jpg}
+\cardImage{0075.jpg}
+\cardImage{0076.jpg}
+\cardImage{0077.jpg}
+\cardImage{0078.jpg}
+\cardImage{0079.jpg}
+\cardImage{0080.jpg}
+\cardImage{0081.jpg}
+\cardImage{0082.jpg}
+\cardImage{0083.jpg}
+\cardImage{0084.jpg}
+\cardImage{0085.jpg}
+\cardImage{0086.jpg}
+\cardImage{0087.jpg}
+\cardImage{0088.jpg}
+\cardImage{0089.jpg}
+\cardImage{0090.jpg}
+\cardImage{0091.jpg}
+\cardImage{0092.jpg}
+\cardImage{0093.jpg}
+\cardImage{0094.jpg}
+\cardImage{0095.jpg}
+\cardImage{0096.jpg}
 
 % Quote Pages
-\pageQuote{solarizedMagenta} {20pt}{What would you}{recommend?}
-\pageQuote{solarizedViolet}  {16pt}{Take more pictures}{\rotatebox{180}{Take more pictures}}
-\pageQuote{solarizedBlue}    {20pt}{Have it in my size?}{82/69/89}
-\pageQuote{solarizedCyan}    {20pt}{Talk it over some}{\sout{coffee} tea}
-\pageQuote{solarizedGreen}   {30pt}{I'm your}{guy\raisebox{-6pt}{-}guy.}
+\setmainfont [ Path = ./fonts/Raleway/] {Raleway-Thin.ttf}
+\pageQuote{solarizedRed}     {24pt}{Is loneliness}{contagious?}
 
 \setmainfont [ Path = ./fonts/Homemade_Apple/] {HomemadeApple-Regular.ttf}
-
-% \pageQuote{solarizedGreen}  {16pt}{Nothing is as permenent}{as a temporary solution.}
-\pageQuote{solarizedCyan}   {20pt}{One copy\dots}{is none copy.}
-\pageQuote{solarizedBlue}   {22pt}{Is loneliness}{contagious?}
-\pageQuote{solarizedBase03} {24pt}{the devil}{you know}
-
-\setmainfont [ Path = ./fonts/Dawning_of_a_New_Day/] {DawningofaNewDay-Regular.ttf}
-
-\pageQuote{solarizedOrange}   {36pt}{\rotatebox{7}{Crazy as me}}{}
-\pageQuote{solarizedYellow}   {28pt}{Come ease your}{mind with me.}
+\pageQuote{solarizedBase02} {24pt}{the devil}{you know}
 
 \setmainfont [ Path = ./fonts/Special_Elite/] {SpecialElite-Regular.ttf}
-
-\pageQuote{solarizedViolet}  {19pt}{Tell me\dots}{What do you Love?}
-\pageQuote{solarizedMagenta} {30pt}{}{With love,}
-\pageQuote{solarizedRed}     {16pt}{Some call it foolish,}{guess I'll call it art.}
+\pageQuote{solarizedViolet} {30pt}{}{With love,}
 
 % Terminal Pages
-\terminal{\terminalLine{28mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{25mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{22mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{19mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{16mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{13mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{10mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{./hello}}
-         {\terminalLine{07mm}{\termnialTime{22:10}}{\raisebox{-6pt}{\char`~}}{\_}}
-
-\terminal{\terminalLine{28mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{25mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{22mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{19mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{16mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{13mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{10mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{exit}}
-         {\terminalLine{07mm}{\termnialTime{03:12}}{\raisebox{-6pt}{\char`~}}{\_}}
-
-\terminal{\terminalLine{28mm}{\termnialTime{11:10}}{/DE/Berlin}{cd ../Frankfurt}}
-         {\terminalLine{25mm}{\termnialTime{13:26}}{/DE/Frankfurt}{cd ..}}
-         {\terminalLine{22mm}{\termnialTime{13:26}}{/DE}{cd ../US}}
-         {\terminalLine{19mm}{\termnialTime{16:42}}{/US}{cd Atlanta}}
-         {\terminalLine{16mm}{\termnialTime{16:42}}{/US/Atlanta}{cd}}
-         {\terminalLine{13mm}{\termnialTime{17:36}}{\raisebox{-6pt}{\char`~}}{\_}}
-         {}{}
+\terminal{\terminalLine{28mm}{\termnialTime{02:52}}{\raisebox{-6pt}{\char`~}}{./hello}}
+         {\terminalLine{25mm}{\termnialTime{02:52}}{\raisebox{-6pt}{\char`~}}{\_}}
+         {}
+         {}
+         {}
+         {}
+         {}
+         {}
 
 \terminal{\terminalLine{28mm}{\termnialTime{17:10}}{/DE/Berlin}{whoami}}
          {\terminalLine{25mm}{}{}{\textcolor{solarizedBase2}{sawaiz}}}
